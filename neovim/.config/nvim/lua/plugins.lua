@@ -56,30 +56,31 @@ packer.startup(function()
   use({
     "hrsh7th/nvim-cmp",
     config = get_plugin_config("cmp"),
+    wants = { "LuaSnip" },
     requires = {
-      {
-        "L3MON4D3/LuaSnip",
-        requires = {
-          "rafamadriz/friendly-snippets",
-        },
-        config = get_plugin_config("luasnip"),
-      },
       "andersevenrud/cmp-tmux",
       "aspeddro/cmp-pandoc.nvim",
       "f3fora/cmp-spell",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
-      { "zbirenbaum/copilot-cmp", module = "copilot_cmp" },
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      "hrsh7th/cmp-nvim-lsp-signature-help",
-      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      "rafamadriz/friendly-snippets",
+      { "zbirenbaum/copilot-cmp", module = "copilot_cmp" },
+      { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
       { "tzachar/cmp-tabnine", run = "./install.sh", config = get_plugin_config("tabnine") },
       { "romgrk/fzy-lua-native", run = "make" },
       { "tzachar/cmp-fuzzy-path", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
       { "tzachar/cmp-fuzzy-buffer", requires = { "hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim" } },
+      {
+        "L3MON4D3/LuaSnip",
+        event = "InsertEnter",
+        wants = { "friendly-snippets" },
+        config = get_plugin_config("luasnip"),
+      },
     },
   }) -- }}}
   -- Colorizer (Colour previews for things that define colours in code){{{
@@ -221,7 +222,7 @@ packer.startup(function()
       "hrsh7th/nvim-cmp",
       "onsails/lspkind-nvim",
       "ray-x/lsp_signature.nvim",
-      "folke/lua-dev.nvim",
+      { "folke/lua-dev.nvim", ft = "lua" },
       {
         "ray-x/go.nvim",
         config = get_plugin_config("go"),
